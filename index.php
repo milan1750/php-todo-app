@@ -6,6 +6,7 @@ use Todo\Todo;
 
 if ( ! file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
 	echo 'Requires autoloader files to work properly. Run <code>composer update</code> from root directory.';
+	exit(1);
 }
 
 /**
