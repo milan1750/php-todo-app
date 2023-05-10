@@ -12,6 +12,5 @@ final class ValidationTest extends TestCase
 		$this->assertTrue($validation->validate_email( 'sukhdeep@gmail.com' ) );
 		$this->assertFalse($validation->validate_email( 'niruta@gmail' ) );
 		$this->assertFalse($validation->validate_email( 'Kajol' ) );
-		$this->assertTrue($validation->validate_email( 'Kajol2' ) );
 	}
 }
