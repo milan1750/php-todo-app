@@ -11,12 +11,12 @@ jobs:
       matrix:
         php-version: [7.x, 8.x]
     steps:
-      uses: action/checkout@v3
-      with:
-        php-version: ${{matrix.php-version}}
-      name: Install Composer Dependencies
+      - uses: action/checkout@v3
+        with:
+          php-version: ${{matrix.php-version}}
+      -name: Install Composer Dependencies
       working-directory: ./
-      run: composer install --prefer-dist
-      name: Run Tests
+      -run: composer install --prefer-dist
+      -name: Run Tests
       working-directory: ./
-      run: ./vendor/bin/phpunit --verbose tests
+      -run: ./vendor/bin/phpunit --verbose tests
