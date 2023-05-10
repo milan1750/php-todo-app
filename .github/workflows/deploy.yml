@@ -2,21 +2,26 @@ name: Deploy ToDo app
 
 on:
   push:
-    branches: [main]
-    pull_request: [main]
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
 jobs:
   build:
+
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         php-version: [7.x, 8.x]
+
     steps:
-      - uses: action/checkout@v3
-        with:
-          php-version: ${{matrix.php-version}}
-      -name: Install Composer Dependencies
+    - uses: actions/checkout@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install Composer Dependencies
       working-directory: ./
-      -run: composer install --prefer-dist
-      -name: Run Tests
+    - run: composer install --prefer-dist
+    - name: Run Tests
       working-directory: ./
-      -run: ./vendor/bin/phpunit --verbose tests
+    - run: ./vendor/bin/phpunit --verbose tests
