@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install Composer Dependencies
-    uses: actions/setup-php@v1
+      uses: actions/setup-php@v1
       with:
         node-version: ${{ matrix.php-version }}
       working-directory: ./
