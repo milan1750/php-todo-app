@@ -16,7 +16,7 @@ jobs:
         php-version: [7.x, 8.x]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install Composer Dependencies
         working-directory: ./
         run: composer install --prefer-dist
