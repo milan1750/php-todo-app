@@ -18,8 +18,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install Composer Dependencies
-      working-directory: ./
-      run: composer install --prefer-dist
+      - working-directory: ./
+      - run: composer install --prefer-dist
     - name: Run Tests
-      working-directory: ./
-      run: ./vendor/bin/phpunit --verbose tests
+      - working-directory: ./
+      - run: ./vendor/bin/phpunit --verbose tests
