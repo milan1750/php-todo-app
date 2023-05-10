@@ -16,10 +16,10 @@ jobs:
         php-version: [7.x, 8.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Install Composer Dependencies
-      - working-directory: ./
-      - run: composer install --prefer-dist
-    - name: Run Tests
-      - working-directory: ./
-      - run: ./vendor/bin/phpunit --verbose tests
+      - uses: actions/checkout@v2
+      - name: Install Composer Dependencies
+        working-directory: ./
+        run: composer install --prefer-dist
+      - name: Run Tests
+        working-directory: ./
+        run: ./vendor/bin/phpunit --verbose tests
