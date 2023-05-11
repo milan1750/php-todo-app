@@ -1,0 +1,52 @@
+name: Run unit tests on PR
+on:
+  pull_request:
+    branches:
+      - "main"
+
+# Cancels all previous workflow runs for pull requests that have not completed.
+concurrency:
+  # The concurrency group contains the workflow name and the branch name for pull requests
+  # or the commit hash for any other events.
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  unit-php:
+    name: PHP ${{ matrix.php }} WP ${{ matrix.wp }}
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ["7.2", "7.3", "7.4", "8.0", "8.1"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          tools: composer
+          extensions: mysqli
+          coverage: none
+
+      - name: Tool versions
+        run: |
+          php --version
+          composer --version
+
+      - name: Get cached composer directories
+        uses: actions/cache@v2
+        with:
+          path: ~/.composer/cache
+          key: ${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+
+      - name: Setup and install composer
+        run: |
+          composer install --prefer-dist
+          composer require --dev --update-with-dependencies
+
+      - name: Run unit tests
+        run: composer test

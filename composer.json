@@ -16,5 +16,10 @@
 			"email": "milanmalla2015@gmail.com"
 		}
 	],
-	"require": {}
+	"require": {},
+	"scripts": {
+		"test": [
+			"./vendor/bin/phpunit --verbose tests"
+		]
+	}
 }
