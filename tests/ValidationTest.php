@@ -15,6 +15,7 @@ final class ValidationTest extends TestCase
 	}
 
 	public function testPasswordConfirmation() {
+		$validation = new Validation();
 		$this->assertTrue($validation->validate_password( '1235252@1122', '1235252@1122' ) );
 		$this->assertTrue($validation->validate_password( 'milanmalla2015@gmail.com', 'milanmalla2015@gmail.com' ) );
 		$this->assertFalse($validation->validate_password( 'niruta@gmail', 'niruta@gmail12' ) );
