@@ -8,7 +8,6 @@ build/
 changelog.txt
 composer.*
 tests/
-vendor/
 none
 package-lock.json
 package.json
