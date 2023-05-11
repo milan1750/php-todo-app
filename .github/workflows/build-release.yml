@@ -23,3 +23,13 @@ jobs:
           asset_path: ${{ steps.build.outputs.zip_path }}
           asset_name: php-todo-app.zip
           asset_content_type: application/zip
+      - name: Deploy to Digital Ocean
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: ${{ secrets.DO_USER }}
+          password: ${{ secrets.DO_PASSWORD }}
+          port: ${{ secrets.DO_PORT }}
+          source: ${{ steps.build.outputs.zip_path }}
+          strip_components: 2
+          target: "/var/www/php-todo"
