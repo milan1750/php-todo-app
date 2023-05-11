@@ -23,18 +23,7 @@ jobs:
           asset_path: ${{ steps.build.outputs.zip_path }}
           asset_name: php-todo-app.zip
           asset_content_type: application/zip
-      - name: Deploy to DigitalOcean Droplet
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{secrets.DO_HOST}}
-          username: ${{secrets.DO_USERNAME}}
-          key: ${{secrets.DO_TOKEN}}
-          port: ${{ secrets.DO_PORT }}
-          script: |
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh
-            rm -rf phpapps
-            mkdir phpapps
-            cd phpapps
-            git clone git@github.com:milan1750/php-todo-app
-            echo 'Deployment to digital ocean finished'
+      - name: Deploy to Digital Ocean
+        run: |
+          php --version
+          composer --version
